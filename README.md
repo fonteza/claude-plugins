@@ -14,7 +14,7 @@ Com ele, o Claude consulta dados públicos oficiais do Brasil:
 No Claude Code:
 
 ```
-/plugin marketplace add <dono>/<repositório>
+/plugin marketplace add fonteza/claude-plugins
 /plugin install fonteza@fonteza
 ```
 
