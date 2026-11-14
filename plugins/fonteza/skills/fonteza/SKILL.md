@@ -1,36 +1,28 @@
 ---
 name: fonteza
-description: Consulta dados públicos oficiais do Brasil pelo MCP da Fonteza — cadastro de empresas da Receita Federal (CNPJ, sócios, CNAE), números de mercado por setor e estado e despesas federais pagas a uma empresa. Use quando a tarefa pedir dados de empresas brasileiras, CNPJs, CNAEs, fornecedores do governo ou gastos federais.
+description: Consulta dados públicos oficiais do Brasil pelo MCP da Fonteza — cadastro de empresas da Receita Federal (CNPJ, sócios, CNAE), e números de mercado por setor e estado. Use quando a tarefa pedir dados de empresas brasileiras, CNPJs, CNAEs ou o tamanho de um setor.
 ---
 
 # Fonteza
 
 A Fonteza republica dados públicos oficiais por um MCP remoto (servidor `fonteza`). Toda resposta de dados vem em `{"data": ..., "meta": ...}`; `meta.fonte` diz de onde veio o dado.
 
-## Comece por `descobrir_cobertura`
-
-Antes da primeira consulta de dados da conversa, chame `descobrir_cobertura` (sem argumentos). Ela lista as fontes publicadas, o período, a cobertura geográfica, as definições e as limitações conhecidas, e traz em `meta.aviso` o aviso operacional vigente, como manutenção ou carga em andamento. Não consome cota. Se a pergunta cair fora da cobertura declarada, diga isso em vez de consultar.
-
-Se alguma resposta trouxer `meta.aviso`, repasse o aviso ao usuário.
+Se alguma resposta trouxer `meta.aviso`, como manutenção ou carga em andamento, repasse o aviso ao usuário.
 
 ## Ferramentas
 
 | Ferramenta | Para quê | Argumentos principais |
 | --- | --- | --- |
-| `descobrir_cobertura` | Fontes, período, cobertura, limitações e aviso vigente. | nenhum |
 | `buscar_empresas` | Encontrar empresas por nome, CNPJ, atividade ou códigos CNAE. | `q` e/ou `cnae` (até 10 códigos ou prefixos); filtros `uf`, `municipio` (envie também `uf`), `somente_matriz`, `porte` (00/01/03/05), `capital_min`, `capital_max`, `data_inicio_de`, `data_inicio_ate` (YYYY-MM-DD), `tem_email`, `tem_telefone`, `simples` (S/N), `mei` (S/N); `ordenar_por`, `ordem`; `limit` (até 50), `offset` |
 | `obter_empresa` | Cadastro completo e sócios de um CNPJ. | `cnpj` |
 | `mercado_por_cnae` | Quantas empresas de um setor existem, abrem e encerram num estado. | `uf` e exatamente um de `cnae`, `categoria` ou `grupo`; `municipio`, `perfil`, `faixa_capital`, `agrupar_por` (municipio, cnae ou faixa_capital) |
-| `iniciar_agente_mercado` | Pedir uma análise escrita de um setor para um objetivo. Assíncrona; só contas liberadas. | `objetivo` mais os filtros de `mercado_por_cnae`; `webhook` |
-| `consultar_execucao` | Acompanhar a análise pedida. | `id` (o UUID devolvido) |
-| `despesas_federais_da_empresa` | Empenhos, liquidações e pagamentos federais a um CNPJ. | `cnpj`, `escopo` (padrão raiz), `fase`, `data_de`, `data_ate`, `limit` (até 50), `cursor` |
+| `consultar_execucao` | Ler uma execução de agente pedida pela conta. | `id` (UUID) |
 
 A listagem do próprio MCP traz a descrição completa de cada argumento; leia-a quando houver dúvida.
 
 ## Cite a procedência
 
 - Toda resposta com dados da Receita Federal traz `meta.competencia` e `meta.snapshot_id`. Ao apresentar o resultado, cite a competência (e o `snapshot_id` quando o usuário for guardar ou reutilizar o dado), junto com a fonte de `meta.fonte`.
-- Para despesas federais, cite a fonte e a janela que a resposta declara.
 
 ## Receita Federal: só a publicação mais recente
 
@@ -52,19 +44,15 @@ Uma busca que exigiria varrer boa parte da base volta com o erro `busca_ampla_re
 
 ## Cota
 
-Cada chamada bem-sucedida a uma ferramenta de dados consome uma unidade da cota diária da conta, mesmo com resultado vazio. `descobrir_cobertura`, a listagem de ferramentas, argumentos inválidos, falhas e timeouts não consomem.
+Cada chamada bem-sucedida a uma ferramenta de dados consome uma unidade da cota diária da conta, mesmo com resultado vazio. A listagem de ferramentas, argumentos inválidos, falhas e timeouts não consomem.
 
 - Não pagine nem repita chamadas sem necessidade; peça ao usuário antes de percorrer muitas páginas.
 - Ao atingir a cota, o MCP responde que a cota diária foi atingida. Pare e avise o usuário; a contagem recomeça à meia-noite de Brasília.
-- Em `iniciar_agente_mercado`, consulte `consultar_execucao` a cada poucos segundos, não em laço contínuo.
+- Em `consultar_execucao`, espere alguns segundos entre consultas, não use laço contínuo.
 
 ## Leitura correta dos números de mercado
 
 `mercado_por_cnae` conta estabelecimentos de empresas (natureza jurídica 2xxx), só pelo CNAE principal. Encerramento é baixada ou inapta. MEI nunca é somado a ME. `demais` é o porte acima de EPP e não separa média de grande empresa. Capital social é o declarado, não faturamento, e cada filial leva o capital da empresa. Para comparar estados, faça uma chamada por estado. Meses sem aberturas ou encerramentos não aparecem: preencha zeros.
-
-## Despesas federais
-
-Empenho, liquidação e pagamento são fases distintas; não some fases. Nenhum resultado quer dizer só que nada apareceu na janela declarada, não que a empresa nunca recebeu recursos federais.
 
 ## Erros
 

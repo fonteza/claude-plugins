@@ -19,7 +19,7 @@ No Claude Code:
 
 Depois, rode `/mcp`, escolha `fonteza` e entre com a sua conta Fonteza no navegador. Não é preciso copiar chave.
 
-Para conferir, peça ao Claude: "Quais fontes a Fonteza cobre?". Ele chama `descobrir_cobertura`, que não consome cota.
+Para conferir, peça ao Claude: "Quantas empresas de padaria estão ativas em Curitiba?". Ele chama `mercado_por_cnae`.
 
 ## Alternativa: chave de API
 
@@ -35,17 +35,14 @@ Guarde a chave numa variável de ambiente ou num gerenciador de segredos; nunca 
 
 | Ferramenta | O que faz |
 | --- | --- |
-| `descobrir_cobertura` | Fontes publicadas, período, cobertura, limitações e aviso operacional vigente. Não consome cota. |
 | `buscar_empresas` | Busca empresas por nome, CNPJ, atividade ou códigos CNAE, com filtros. |
 | `obter_empresa` | Cadastro completo e sócios de um CNPJ. |
 | `mercado_por_cnae` | Números de mercado de um setor num estado. |
-| `iniciar_agente_mercado` | Pede uma análise escrita de um setor para um objetivo (contas liberadas). |
-| `consultar_execucao` | Acompanha a análise pedida. |
-| `despesas_federais_da_empresa` | Despesas federais de um CNPJ. |
+| `consultar_execucao` | Lê uma execução de agente pedida pela conta. |
 
 ## Cota
 
-Cada chamada bem-sucedida a uma ferramenta de dados consome uma unidade da cota diária da sua conta, mesmo com resultado vazio. `descobrir_cobertura`, argumentos inválidos, falhas e timeouts não consomem. A contagem recomeça à meia-noite de Brasília.
+Cada chamada bem-sucedida a uma ferramenta de dados consome uma unidade da cota diária da sua conta, mesmo com resultado vazio. Argumentos inválidos, falhas e timeouts não consomem. A contagem recomeça à meia-noite de Brasília.
 
 ## Sobre os dados
 
