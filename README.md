@@ -6,7 +6,6 @@ Com ele, o Claude consulta dados públicos oficiais do Brasil:
 
 - cadastro de empresas da Receita Federal: CNPJ, endereço, CNAEs, porte, situação e sócios (CPFs mascarados);
 - números de mercado de um setor num estado: empresas ativas, aberturas e encerramentos;
-- oportunidades de licitação do PNCP;
 - empenhos, liquidações e pagamentos federais a uma empresa.
 
 ## Instalação
@@ -42,7 +41,6 @@ Guarde a chave numa variável de ambiente ou num gerenciador de segredos; nunca 
 | `mercado_por_cnae` | Números de mercado de um setor num estado. |
 | `iniciar_agente_mercado` | Pede uma análise escrita de um setor para um objetivo (contas liberadas). |
 | `consultar_execucao` | Acompanha a análise pedida. |
-| `buscar_oportunidades` | Oportunidades de licitação do PNCP. |
 | `despesas_federais_da_empresa` | Despesas federais de um CNPJ. |
 
 ## Cota

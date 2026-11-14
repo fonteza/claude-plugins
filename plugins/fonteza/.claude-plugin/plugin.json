@@ -1,12 +1,12 @@
 {
   "name": "fonteza",
-  "version": "0.1.0",
-  "description": "Dados públicos oficiais do Brasil no Claude Code: cadastro de empresas da Receita Federal, números de mercado por CNAE, oportunidades do PNCP e despesas federais.",
+  "version": "0.2.0",
+  "description": "Dados públicos oficiais do Brasil no Claude Code: cadastro de empresas da Receita Federal, números de mercado por CNAE e despesas federais.",
   "author": {
     "name": "Fonteza",
     "email": "contato@fonteza.com.br",
     "url": "https://fonteza.com.br"
   },
   "homepage": "https://fonteza.com.br/docs/agentes",
-  "keywords": ["brasil", "cnpj", "receita-federal", "pncp", "licitacoes", "dados-publicos", "mcp"]
+  "keywords": ["brasil", "cnpj", "receita-federal", "dados-publicos", "mcp"]
 }

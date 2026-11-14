@@ -1,6 +1,6 @@
 ---
 name: fonteza
-description: Consulta dados públicos oficiais do Brasil pelo MCP da Fonteza — cadastro de empresas da Receita Federal (CNPJ, sócios, CNAE), números de mercado por setor e estado, oportunidades de licitação do PNCP e despesas federais pagas a uma empresa. Use quando a tarefa pedir dados de empresas brasileiras, CNPJs, CNAEs, licitações, fornecedores do governo ou gastos federais.
+description: Consulta dados públicos oficiais do Brasil pelo MCP da Fonteza — cadastro de empresas da Receita Federal (CNPJ, sócios, CNAE), números de mercado por setor e estado e despesas federais pagas a uma empresa. Use quando a tarefa pedir dados de empresas brasileiras, CNPJs, CNAEs, fornecedores do governo ou gastos federais.
 ---
 
 # Fonteza
@@ -23,7 +23,6 @@ Se alguma resposta trouxer `meta.aviso`, repasse o aviso ao usuário.
 | `mercado_por_cnae` | Quantas empresas de um setor existem, abrem e encerram num estado. | `uf` e exatamente um de `cnae`, `categoria` ou `grupo`; `municipio`, `perfil`, `faixa_capital`, `agrupar_por` (municipio, cnae ou faixa_capital) |
 | `iniciar_agente_mercado` | Pedir uma análise escrita de um setor para um objetivo. Assíncrona; só contas liberadas. | `objetivo` mais os filtros de `mercado_por_cnae`; `webhook` |
 | `consultar_execucao` | Acompanhar a análise pedida. | `id` (o UUID devolvido) |
-| `buscar_oportunidades` | Licitações do PNCP por palavras e filtros. | `q`, `uf`, `municipio_ibge`, `modalidade`, `status`, `prazo_de`, `prazo_ate`, `limit` (até 50), `cursor` |
 | `despesas_federais_da_empresa` | Empenhos, liquidações e pagamentos federais a um CNPJ. | `cnpj`, `escopo` (padrão raiz), `fase`, `data_de`, `data_ate`, `limit` (até 50), `cursor` |
 
 A listagem do próprio MCP traz a descrição completa de cada argumento; leia-a quando houver dúvida.
@@ -31,7 +30,7 @@ A listagem do próprio MCP traz a descrição completa de cada argumento; leia-a
 ## Cite a procedência
 
 - Toda resposta com dados da Receita Federal traz `meta.competencia` e `meta.snapshot_id`. Ao apresentar o resultado, cite a competência (e o `snapshot_id` quando o usuário for guardar ou reutilizar o dado), junto com a fonte de `meta.fonte`.
-- Para PNCP e despesas federais, cite a fonte e o recorte ou a janela que a resposta declara.
+- Para despesas federais, cite a fonte e a janela que a resposta declara.
 
 ## Receita Federal: só a publicação mais recente
 
@@ -65,7 +64,7 @@ Cada chamada bem-sucedida a uma ferramenta de dados consome uma unidade da cota 
 
 ## Despesas federais
 
-Empenho, liquidação e pagamento são fases distintas; não some fases. Nenhum resultado quer dizer só que nada apareceu na janela declarada, não que a empresa nunca recebeu recursos federais. Não há vínculo inferido entre despesas e licitações do PNCP.
+Empenho, liquidação e pagamento são fases distintas; não some fases. Nenhum resultado quer dizer só que nada apareceu na janela declarada, não que a empresa nunca recebeu recursos federais.
 
 ## Erros
 
