@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "fonteza": {
+      "type": "http",
+      "url": "https://fonteza.com.br/mcp"
+    }
+  }
+}

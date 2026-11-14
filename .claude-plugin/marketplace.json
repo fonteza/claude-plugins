@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "fonteza",
+  "description": "Plugins oficiais da Fonteza para o Claude Code: dados públicos oficiais de empresas, licitações e gastos federais do Brasil.",
+  "owner": {
+    "name": "Fonteza",
+    "email": "contato@fonteza.com.br"
+  },
+  "plugins": [
+    {
+      "name": "fonteza",
+      "description": "MCP remoto da Fonteza e uma skill que ensina a consultar CNPJs, mercado por CNAE, oportunidades do PNCP e despesas federais com procedência.",
+      "source": "./plugins/fonteza",
+      "category": "data",
+      "homepage": "https://fonteza.com.br"
+    }
+  ]
+}
