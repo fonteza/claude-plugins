@@ -1,6 +1,6 @@
 {
   "name": "fonteza",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Dados públicos oficiais do Brasil no Claude Code: cadastro de empresas da Receita Federal, números de mercado por CNAE e despesas federais.",
   "author": {
     "name": "Fonteza",
@@ -8,5 +8,8 @@
     "url": "https://fonteza.com.br"
   },
   "homepage": "https://fonteza.com.br/docs/agentes",
+  "privacyPolicyUrl": "https://fonteza.com.br/docs/privacidade",
+  "license": "MIT",
+  "icon": ".claude-plugin/icon.png",
   "keywords": ["brasil", "cnpj", "receita-federal", "dados-publicos", "mcp"]
 }
