@@ -38,7 +38,6 @@ Guarde a chave numa variável de ambiente ou num gerenciador de segredos; nunca 
 | `buscar_empresas` | Busca empresas por nome, CNPJ, atividade ou códigos CNAE, com filtros. |
 | `obter_empresa` | Cadastro completo e sócios de um CNPJ. |
 | `mercado_por_cnae` | Números de mercado de um setor num estado. |
-| `consultar_execucao` | Lê uma execução de agente pedida pela conta. |
 
 ## Cota
 

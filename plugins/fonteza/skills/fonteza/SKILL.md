@@ -16,7 +16,6 @@ Se alguma resposta trouxer `meta.aviso`, como manutenção ou carga em andamento
 | `buscar_empresas` | Encontrar empresas por nome, CNPJ, atividade ou códigos CNAE. | `q` e/ou `cnae` (até 10 códigos ou prefixos); filtros `uf`, `municipio` (envie também `uf`), `somente_matriz`, `porte` (00/01/03/05), `capital_min`, `capital_max`, `data_inicio_de`, `data_inicio_ate` (YYYY-MM-DD), `tem_email`, `tem_telefone`, `simples` (S/N), `mei` (S/N); `ordenar_por`, `ordem`; `limit` (até 50), `offset` |
 | `obter_empresa` | Cadastro completo e sócios de um CNPJ. | `cnpj` |
 | `mercado_por_cnae` | Quantas empresas de um setor existem, abrem e encerram num estado. | `uf` e exatamente um de `cnae`, `categoria` ou `grupo`; `municipio`, `perfil`, `faixa_capital`, `agrupar_por` (municipio, cnae ou faixa_capital) |
-| `consultar_execucao` | Ler uma execução de agente pedida pela conta. | `id` (UUID) |
 
 A listagem do próprio MCP traz a descrição completa de cada argumento; leia-a quando houver dúvida.
 
@@ -48,7 +47,6 @@ Cada chamada bem-sucedida a uma ferramenta de dados consome uma unidade da cota 
 
 - Não pagine nem repita chamadas sem necessidade; peça ao usuário antes de percorrer muitas páginas.
 - Ao atingir a cota, o MCP responde que a cota diária foi atingida. Pare e avise o usuário; a contagem recomeça à meia-noite de Brasília.
-- Em `consultar_execucao`, espere alguns segundos entre consultas, não use laço contínuo.
 
 ## Leitura correta dos números de mercado
 
