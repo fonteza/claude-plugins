@@ -13,9 +13,9 @@ Se alguma resposta trouxer `meta.aviso`, como manutenção ou carga em andamento
 
 | Ferramenta | Para quê | Argumentos principais |
 | --- | --- | --- |
-| `buscar_empresas` | Encontrar empresas por nome, CNPJ, atividade ou códigos CNAE. | `q` e/ou `cnae` (até 10 códigos ou prefixos); filtros `uf`, `municipio` (envie também `uf`), `somente_matriz`, `porte` (00/01/03/05), `capital_min`, `capital_max`, `data_inicio_de`, `data_inicio_ate` (YYYY-MM-DD), `tem_email`, `tem_telefone`, `simples` (S/N), `mei` (S/N); `ordenar_por`, `ordem`; `limit` (até 50), `offset` |
-| `obter_empresa` | Cadastro completo e sócios de um CNPJ. | `cnpj` |
-| `mercado_por_cnae` | Quantas empresas de um setor existem, abrem e encerram num estado. | `uf` e exatamente um de `cnae`, `categoria` ou `grupo`; `municipio`, `perfil`, `faixa_capital`, `agrupar_por` (municipio, cnae ou faixa_capital) |
+| `consultar_empresas` | Encontrar empresas por nome, CNPJ, atividade ou códigos CNAE. | `q` e/ou `cnae` (até 10 códigos ou prefixos); filtros `uf`, `municipio` (envie também `uf`), `somente_matriz`, `porte` (00/01/03/05), `capital_min`, `capital_max`, `data_inicio_de`, `data_inicio_ate` (YYYY-MM-DD), `tem_email`, `tem_telefone`, `simples` (S/N), `mei` (S/N); `ordenar_por`, `ordem`; `limit` (até 50), `offset` |
+| `consultar_empresa` | Cadastro completo e sócios de um CNPJ. | `cnpj` |
+| `consultar_mercado` | Quantas empresas de um setor existem, abrem e encerram num estado. | `uf` e exatamente um de `cnae`, `categoria` ou `grupo`; `municipio`, `perfil`, `faixa_capital`, `agrupar_por` (municipio, cnae ou faixa_capital) |
 
 A listagem do próprio MCP traz a descrição completa de cada argumento; leia-a quando houver dúvida.
 
@@ -27,7 +27,7 @@ A listagem do próprio MCP traz a descrição completa de cada argumento; leia-a
 
 A Fonteza usa exclusivamente a publicação mais recente da Receita Federal. Não há consulta a versões anteriores, comparação entre publicações nem reconstrução do cadastro em outra data. `competencia` e `snapshot_id` identificam a publicação corrente; não são parâmetros.
 
-Se a tarefa pedir histórico ("qual era o endereço em 2022", "quando o sócio saiu"), explique a limitação e responda só com o que a publicação atual contém: datas de abertura, encerramento e entrada de sócios continuam disponíveis. A série mensal de `mercado_por_cnae` agrupa datas dessa publicação; não é uma série de cadastros mensais.
+Se a tarefa pedir histórico ("qual era o endereço em 2022", "quando o sócio saiu"), explique a limitação e responda só com o que a publicação atual contém: datas de abertura, encerramento e entrada de sócios continuam disponíveis. A série mensal de `consultar_mercado` agrupa datas dessa publicação; não é uma série de cadastros mensais.
 
 ## CPFs ficam mascarados
 
@@ -39,7 +39,7 @@ Uma busca que exigiria varrer boa parte da base volta com o erro `busca_ampla_re
 
 - Antes de rodar uma busca vaga ("todas as empresas de tecnologia do Brasil"), confirme com o usuário o recorte: estado, município, um CNAE mais específico.
 - Ao receber o erro, use `meta.cnaes_sugeridos`, quando vier, para propor códigos CNAE ao usuário e refaça com `uf`, `municipio` ou um código mais específico. Não repita a mesma chamada.
-- Para contagens, prefira `mercado_por_cnae` a paginar `buscar_empresas`: `buscar_empresas` não traz total (`total` vem `null`); pagine com `offset` enquanto `has_more` for verdadeiro.
+- Para contagens, prefira `consultar_mercado` a paginar `consultar_empresas`: `consultar_empresas` não traz total (`total` vem `null`); pagine com `offset` enquanto `has_more` for verdadeiro.
 
 ## Cota
 
@@ -50,7 +50,7 @@ Cada chamada bem-sucedida a uma ferramenta de dados consome uma unidade da cota 
 
 ## Leitura correta dos números de mercado
 
-`mercado_por_cnae` conta estabelecimentos de empresas (natureza jurídica 2xxx), só pelo CNAE principal. Encerramento é baixada ou inapta. MEI nunca é somado a ME. `demais` é o porte acima de EPP e não separa média de grande empresa. Capital social é o declarado, não faturamento, e cada filial leva o capital da empresa. Para comparar estados, faça uma chamada por estado. Meses sem aberturas ou encerramentos não aparecem: preencha zeros.
+`consultar_mercado` conta estabelecimentos de empresas (natureza jurídica 2xxx), só pelo CNAE principal. Encerramento é baixada ou inapta. MEI nunca é somado a ME. `demais` é o porte acima de EPP e não separa média de grande empresa. Capital social é o declarado, não faturamento, e cada filial leva o capital da empresa. Para comparar estados, faça uma chamada por estado. Meses sem aberturas ou encerramentos não aparecem: preencha zeros.
 
 ## Erros
 
