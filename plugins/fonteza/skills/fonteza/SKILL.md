@@ -14,7 +14,7 @@ Se alguma resposta trouxer `meta.aviso`, como manutenção ou carga em andamento
 | Ferramenta | Para quê | Argumentos principais |
 | --- | --- | --- |
 | `consultar_empresas` | Encontrar empresas por nome, CNPJ, atividade ou códigos CNAE. | `q` e/ou `cnae` (até 10 códigos de 7 dígitos); filtros `uf`, `municipio` (envie também `uf`), `somente_matriz`, `porte` (00/01/03/05), `capital_min`, `capital_max`, `data_inicio_de`, `data_inicio_ate` (YYYY-MM-DD), `tem_email`, `tem_telefone`, `simples` (S/N), `mei` (S/N); `ordenar_por`, `ordem`; `limit` (até 50), `offset` |
-| `consultar_empresa` | Cadastro completo e sócios de um CNPJ. | `cnpj` |
+| `consultar_cnpj` | Cadastro, sócios e despesas federais de um CNPJ. | `cnpj` |
 | `consultar_mercado` | Quantas empresas de um setor existem, abrem e encerram num estado. | `uf` e exatamente um de `cnae`, `categoria` ou `grupo`; `municipio`, `perfil`, `faixa_capital`, `agrupar_por` (municipio, cnae ou faixa_capital) |
 
 A listagem do próprio MCP traz a descrição completa de cada argumento; leia-a quando houver dúvida.

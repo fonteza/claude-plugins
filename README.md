@@ -36,7 +36,7 @@ Guarde a chave numa variável de ambiente ou num gerenciador de segredos; nunca 
 | Ferramenta | O que faz |
 | --- | --- |
 | `consultar_empresas` | Busca empresas por nome, CNPJ, atividade ou códigos CNAE, com filtros. |
-| `consultar_empresa` | Cadastro completo e sócios de um CNPJ. |
+| `consultar_cnpj` | Cadastro, sócios e despesas federais de um CNPJ. |
 | `consultar_mercado` | Números de mercado de um setor num estado. |
 
 ## Cota

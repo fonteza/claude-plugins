@@ -1,6 +1,6 @@
 {
   "name": "fonteza",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Dados públicos oficiais do Brasil no Claude Code: cadastro de empresas da Receita Federal, números de mercado por CNAE.",
   "author": {
     "name": "Fonteza",
